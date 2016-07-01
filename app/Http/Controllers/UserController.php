@@ -22,8 +22,16 @@ class UserController extends Controller
 
 
     public function show($uid){
-        $info = DB::table('user')->where('uid', $uid)->first();
-        print_r($info);
+        //以下方法只查询
+//        $info = DB::table('user')->where('uid', $uid)->first();
+//        var_dump($info);
+//        echo $info['username'];
+
+        //以下方式走model的getUserNameAttribute方法
+        $info = User::find($uid);
+        var_dump($info);
+        var_dump( $info->username );
+
     }
 
     

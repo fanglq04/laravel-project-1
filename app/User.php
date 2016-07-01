@@ -30,6 +30,10 @@ class User extends Authenticatable
     ];
 
 
+    public function getUserNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
 
     public function hasManyInfos()
     {
