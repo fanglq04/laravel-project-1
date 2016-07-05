@@ -20,7 +20,15 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('show/{uid}', 'UserController@show');
 
+    Route::get('profile/update', 'UserController@updateProfile');
+
+    Route::get('profile/update', 'UserController@updateProfile');
+
+
     Route::get('profile/{uid}', 'UserController@profile');
+    Route::get('profile/{uid}/set/nickname', 'UserController@profileSetNickname');
+
+
 
     Route::get('address/{uid}', 'UserController@address');
 
@@ -30,8 +38,22 @@ Route::group(['prefix' => 'users'], function () {
 
 });
 
+Route::group(['prefix' => 'posts'], function () {
+    Route::get('update/{id}', 'PostController@update');
+    Route::get('update_2/{id}', 'PostController@update_2');
+    Route::get('update_3/{id}', 'PostController@update_3');
+
+
+
+});
+
+
+
 
 Route::group(['prefix' => 'posts'], function () {
 
     Route::get('country/{id}', 'PostsController@country');
 });
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
