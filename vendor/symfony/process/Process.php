@@ -79,7 +79,7 @@ class Process
     /**
      * Exit codes translation table.
      *
-     * user-defined errors must use exit codes in the 64-113 range.
+     * User-defined errors must use exit codes in the 64-113 range.
      *
      * @var array
      */
@@ -102,9 +102,9 @@ class Process
         135 => 'Bus error: "access to undefined portion of memory object"',
         136 => 'Floating point exception: "erroneous arithmetic operation"',
         137 => 'Kill (terminate immediately)',
-        138 => 'user-defined 1',
+        138 => 'User-defined 1',
         139 => 'Segmentation violation',
-        140 => 'user-defined 2',
+        140 => 'User-defined 2',
         141 => 'Write to pipe with no one reading',
         142 => 'Signal raised by alarm',
         143 => 'Termination (request to terminate)',
@@ -593,7 +593,7 @@ class Process
      * This method relies on the Unix exit code status standardization
      * and might not be relevant for other operating systems.
      *
-     * @return null|string A string representation for the exit status code, null if the Process is not terminated.
+     * @return null|string A string representation for the exit status code, null if the Process is not terminated
      *
      * @see http://tldp.org/LDP/abs/html/exitcodes.html
      * @see http://en.wikipedia.org/wiki/Unix_signal
@@ -881,7 +881,7 @@ class Process
      *
      * @param int|float|null $timeout The timeout in seconds
      *
-     * @return self The current Process instance.
+     * @return self The current Process instance
      *
      * @throws LogicException           if the output is disabled
      * @throws InvalidArgumentException if the timeout is negative
@@ -1226,7 +1226,7 @@ class Process
     /**
      * Updates the status of the process, reads pipes.
      *
-     * @param bool $blocking Whether to use a blocking read call.
+     * @param bool $blocking Whether to use a blocking read call
      */
     protected function updateStatus($blocking)
     {
@@ -1312,8 +1312,8 @@ class Process
     /**
      * Reads pipes, executes callback.
      *
-     * @param bool $blocking Whether to use blocking calls or not.
-     * @param bool $close    Whether to close file handles or not.
+     * @param bool $blocking Whether to use blocking calls or not
+     * @param bool $close    Whether to close file handles or not
      */
     private function readPipes($blocking, $close)
     {
@@ -1439,7 +1439,7 @@ class Process
     /**
      * Ensures the process is running or terminated, throws a LogicException if the process has a not started.
      *
-     * @param string $functionName The function name that was called.
+     * @param string $functionName The function name that was called
      *
      * @throws LogicException If the process has not run.
      */
@@ -1453,7 +1453,7 @@ class Process
     /**
      * Ensures the process is terminated, throws a LogicException if the process has a status different than `terminated`.
      *
-     * @param string $functionName The function name that was called.
+     * @param string $functionName The function name that was called
      *
      * @throws LogicException If the process is not yet terminated.
      */

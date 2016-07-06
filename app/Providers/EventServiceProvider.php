@@ -16,6 +16,10 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\SomeEvent' => [
             'App\Listeners\EventListener',
         ],
+        //添加注册事件监听器
+        'App\Events\PodcastWasPurchased' => [
+            'App\Listeners\EmailPurchaseConfirmation',
+        ],
     ];
 
     /**

@@ -103,7 +103,7 @@ class TraceableUrlMatcherTest extends \PHPUnit_Framework_TestCase
     public function testRoutesWithConditions()
     {
         $routes = new RouteCollection();
-        $routes->add('foo', new Route('/foo', array(), array(), array(), 'baz', array(), array(), "request.headers.get('user-Agent') matches '/firefox/i'"));
+        $routes->add('foo', new Route('/foo', array(), array(), array(), 'baz', array(), array(), "request.headers.get('User-Agent') matches '/firefox/i'"));
 
         $context = new RequestContext();
         $context->setHost('baz');
@@ -112,7 +112,7 @@ class TraceableUrlMatcherTest extends \PHPUnit_Framework_TestCase
 
         $notMatchingRequest = Request::create('/foo', 'GET');
         $traces = $matcher->getTracesForRequest($notMatchingRequest);
-        $this->assertEquals("Condition \"request.headers.get('user-Agent') matches '/firefox/i'\" does not evaluate to \"true\"", $traces[0]['log']);
+        $this->assertEquals("Condition \"request.headers.get('User-Agent') matches '/firefox/i'\" does not evaluate to \"true\"", $traces[0]['log']);
 
         $matchingRequest = Request::create('/foo', 'GET', array(), array(), array(), array('HTTP_USER_AGENT' => 'Firefox'));
         $traces = $matcher->getTracesForRequest($matchingRequest);

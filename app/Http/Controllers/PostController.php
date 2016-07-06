@@ -80,7 +80,11 @@ class PostController extends Controller
     public function update_3($id)
     {
         $post = Post::findOrFail($id);
-        $this->authorize('update', $post);
+        /**
+         * 一个策略类方法对应一个控制器上的方法
+         * 在上面的 update 方法中，控制器方法和策略类方法共享同一个方法名：update。
+         */
+        $this->authorize('show', $post);
 
     }
 

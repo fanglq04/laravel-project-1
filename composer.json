@@ -9,7 +9,12 @@
         "laravel/framework": "5.2.*",
         "simplesoftwareio/simple-qrcode": "^1.4",
         "LaravelCollective/html": "^5.2",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "barryvdh/laravel-debugbar": "^2.2",
+        "laravel/cashier": "^6.0",
+        "predis/predis": "*",
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "league/flysystem-rackspace": "^1.0",
+        "barryvdh/laravel-ide-helper": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

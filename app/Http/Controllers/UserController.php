@@ -10,8 +10,14 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
+use Hash;
+use Cache;
+use Event;
+use Redirect;
+use Storage;
 use App\User;
 use Illuminate\Http\Request;
+use App\Events\PodcastWasPurchased;
 
 class UserController extends Controller
 {
@@ -31,11 +37,22 @@ class UserController extends Controller
 
         //以下方式走model的getUserNameAttribute方法
         $info = User::find($uid);
-        print_r($info);
+//        print_r($info);
 //        var_dump( $info->username );
 
         //转换为json字符串
-        echo $info->toJson();
+//        echo $info->toJson();
+        $key = 'user-info-'.$uid;
+
+        if (Cache::has($key)) {
+            echo 'YES';
+            echo Cache::get($key);
+        } else {
+            echo 'no';
+            $info = User::find($uid);
+            Cache::put($key, $info->toJson(), 10);
+        }
+
     }
 
     
@@ -117,6 +134,51 @@ class UserController extends Controller
     }
 
 
+    public function updateAvatar()
+    {
+        //触发事件
+        echo 'this is  update to avatar';
+//        Event::fire(new PodcastWasPurchased());
+        return view('user/update_avatar');
+    }
+
+
+
+    public function updateAvatar2(Request $request)
+    {
+//        $user = User::findOrFail($id);
+//        print_r($_POST);
+//        echo $request->file('avatar')->getRealPath();
+//        exit();
+
+        $avatarObj = $request->file('avatar');
+        $filename =  $avatarObj->getClientOriginalName();
+
+        /**
+         * 使用文件系统将图片上传
+         */
+        Storage::put(
+           "avatars/$filename",
+            file_get_contents($request->file('avatar')->getRealPath())
+        );
+    }
+
+
+    /**
+     * 修改密码
+     * @param Request $request
+     */
+    public function updatePassword(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $user = $request->user();
+            $user->fill(['password' => Hash::make($request->input('newpassword'))])->save();
+            return redirect::to('/home');
+        }
+
+        return view('user/update-password');
+        
+    }
 
 
 

@@ -48,15 +48,15 @@ class ErrorHandler
 {
     private $levels = array(
         E_DEPRECATED => 'Deprecated',
-        E_USER_DEPRECATED => 'user Deprecated',
+        E_USER_DEPRECATED => 'User Deprecated',
         E_NOTICE => 'Notice',
-        E_USER_NOTICE => 'user Notice',
+        E_USER_NOTICE => 'User Notice',
         E_STRICT => 'Runtime Notice',
         E_WARNING => 'Warning',
-        E_USER_WARNING => 'user Warning',
+        E_USER_WARNING => 'User Warning',
         E_COMPILE_WARNING => 'Compile Warning',
         E_CORE_WARNING => 'Core Warning',
-        E_USER_ERROR => 'user Error',
+        E_USER_ERROR => 'User Error',
         E_RECOVERABLE_ERROR => 'Catchable Fatal Error',
         E_COMPILE_ERROR => 'Compile Error',
         E_PARSE => 'Parse Error',
@@ -353,7 +353,7 @@ class ErrorHandler
      * @param int    $line
      * @param array  $context
      *
-     * @return bool Returns false when no handling happens so that the PHP engine can handle the error itself.
+     * @return bool Returns false when no handling happens so that the PHP engine can handle the error itself
      *
      * @throws \ErrorException When $this->thrownErrors requests so
      *

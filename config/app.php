@@ -162,6 +162,10 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         Barryvdh\Debugbar\ServiceProvider::class,
+
+        Laravel\Cashier\CashierServiceProvider::class,
+
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
 
     /*

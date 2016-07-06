@@ -18,16 +18,14 @@ Route::get('/', function () {
 Route::group(['prefix' => 'users'], function () {
     Route::get('lists', 'UserController@lists');
 
-    Route::get('show/{uid}', 'UserController@show');
+    //AS 是命名路由
+    Route::get('show/{uid?}', ['as' => 'show2', 'uses' => 'UserController@show'] );
 
-    Route::get('profile/update', 'UserController@updateProfile');
 
-    Route::get('profile/update', 'UserController@updateProfile');
-
+//    Route::get('profile/update', 'UserController@updateProfile');
 
     Route::get('profile/{uid}', 'UserController@profile');
     Route::get('profile/{uid}/set/nickname', 'UserController@profileSetNickname');
-
 
 
     Route::get('address/{uid}', 'UserController@address');
@@ -35,6 +33,14 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('bodys/{uid}', 'UserController@bodys');
 
     Route::get('invoices/{uid}', 'UserController@invoices');
+
+    Route::get('profile/update/avatar', 'UserController@updateAvatar');
+
+    Route::post('profile/update/avatar/set', 'UserController@updateAvatar2');
+
+    Route::match(['get', 'post'], 'profile/update/password', 'UserController@updatePassword');
+
+
 
 });
 
@@ -48,7 +54,23 @@ Route::group(['prefix' => 'posts'], function () {
 });
 
 
+Route::group(['prefix' => 'cache'], function () {
+    Route::get('cache_1', 'CacheController@cache_1');
 
+
+});
+
+
+Route::group(['prefix' => 'study'], function () {
+    Route::get('collect_1', 'StudyController@collect_1');
+    Route::get('store_secret', 'StudyController@storeSecret');
+    Route::get('array/helper', 'StudyController@arrayHelper');
+    Route::get('function/helper', 'StudyController@funHelper');
+    Route::get('time',  'StudyController@time' );
+
+
+    Route::get('pages',  'StudyController@pages' );
+});
 
 Route::group(['prefix' => 'posts'], function () {
 
