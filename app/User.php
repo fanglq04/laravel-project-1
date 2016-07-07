@@ -122,4 +122,16 @@ class User extends Authenticatable
     }
 
 
+    /**
+     * 一个user有多个task
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function hasManyTasks()
+    {
+        return $this->hasMany('App\Task', 'user_id');
+    }
+
+
+
+    
 }

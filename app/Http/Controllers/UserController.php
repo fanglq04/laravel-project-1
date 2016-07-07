@@ -8,11 +8,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Task;
 use DB;
 use Auth;
 use Hash;
 use Cache;
 use Event;
+use Validator;
 use Redirect;
 use Storage;
 use App\User;
@@ -24,7 +26,7 @@ class UserController extends Controller
 
     public function lists()
     {
-        $lists = DB::table('user')->get();
+        $lists = DB::table('users')->get();
         return view('user/lists', ['lists' => $lists]);
     }
 
@@ -171,6 +173,10 @@ class UserController extends Controller
     public function updatePassword(Request $request)
     {
         if ($request->isMethod('post')) {
+            //判断规则
+//            $this->validate($request, [
+//                'newpassword' => 'required|min:8|max:20',
+//            ]);
             $user = $request->user();
             $user->fill(['password' => Hash::make($request->input('newpassword'))])->save();
             return redirect::to('/home');
@@ -178,6 +184,23 @@ class UserController extends Controller
 
         return view('user/update-password');
         
+    }
+
+
+    public function postThread(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(), [
+                'title' => 'bail|required|unique:posts|max:255',
+                'author' => 'required|unique:posts|max:250'
+            ]);
+
+            if ($validator->fails()) {
+                return redirect('users/post/thread')->withErrors($validator)->withInput();
+            }
+        } else {
+            return view('user.post-thread');
+        }
     }
 
 

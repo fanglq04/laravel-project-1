@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Policies\TaskPolicy;
 use App\Post;   //new add wjf
 use App\Policies\PostPolicy;    //new add wjf
+use App\Task;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -21,6 +23,10 @@ class AuthServiceProvider extends ServiceProvider
          * 在这里定义策略类与模型对应关系
          */
         Post::class => PostPolicy::class,
+
+        //我们需要关联Task模型和TaskPolicy，注册下
+        //注册后会告知Laravel无论何时我们尝试授权动作到Task实例时该使用哪个策略类进行判断
+        Task::class => TaskPolicy::class,
     ];
 
     /**

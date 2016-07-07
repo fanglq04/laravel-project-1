@@ -8,11 +8,12 @@
 
 namespace App\Http\Controllers;
 
+
 use DB;
 use Log;
 use Crypt;
 use Carbon\Carbon;
-
+use Illuminate\Http\Request;
 
 class StudyController extends Controller
 {
@@ -61,10 +62,10 @@ class StudyController extends Controller
 
     public function storeSecret()
     {
-        Log::info('Wangjiafang');
+//        Log::info('Wangjiafang');
 
         //加密
-        echo Crypt::encrypt('appkey');
+        echo bcrypt('123456');
         //解密
         echo Crypt::decrypt('eyJpdiI6IjRjdHkyZGZaSHFCRllIUWtjVEF0enc9PSIsInZhbHVlIjoiYnlmMXFlb1o0M2w0Qnk1MUVvRGlcL0E9PSIsIm1hYyI6ImZlODEzMTU4MTBiMGNjNDdmMWEwN2U0NWIwZTE0MWY5YzI3NDliNDUxZDc5YTM1M2MxYTVhZWRmMDAyODE4NGQifQ');
     }
@@ -130,5 +131,45 @@ class StudyController extends Controller
         
         return view('study/pages', ['users' => $users]);
     }
+
+
+    public function sessions(Request $request)
+    {
+        //获取单个session
+        $value = $request->session()->get('info', function () {
+            //code
+        });
+
+        //获取所有session
+//        $value = $request->session()->all();
+//        var_dump($value);
+
+        //判断是否存在session
+//        if ($request->session()->has('info')) {
+//            echo '123';
+//        } else {
+//            echo 'not ';
+//        }
+
+
+//        $request->session()->put('s1', 'wangjiafang');
+//        echo $request->session()->get('s1');
+
+        $request->session()->push('user.name', 'wangjiafang-2');
+        $request->session()->push('user.age', '33');
+        $value = $request->session()->get('user');
+        echo "<pre>";
+        var_dump($value);
+        $value = $request->session()->pull('user');
+        var_dump($value);
+
+        $value = $request->session()->flush();
+        var_dump($value);
+
+        echo $request->session()->regenerate();
+        echo $request->session()->regenerateToken();
+
+    }
+
 
 }

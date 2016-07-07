@@ -85,7 +85,6 @@ class PostController extends Controller
          * 在上面的 update 方法中，控制器方法和策略类方法共享同一个方法名：update。
          */
         $this->authorize('show', $post);
-
     }
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,6 +15,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         // Commands\Inspire::class,
+        'App\Console\Commands\Inspire',
+
     ];
 
     /**
@@ -26,5 +29,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->call(function () {
+            DB::table('user')->where('id', 2)->increment('fans');
+        })->everyFiveMinutes();
+
     }
 }
