@@ -27,7 +27,7 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = Task::orderBy('id', 'asc')->get();
+        $tasks = Task::orderBy('id', 'desc')->get();
         return view('task.index', ['tasks' => $tasks]);
     }
 
@@ -80,6 +80,19 @@ class TaskController extends Controller
         return view('task.add');
     }
 
+
+    public function edit(Request $request, $id)
+    {
+        if ($request->isMethod('POST')) {
+//            Task::where('id', $request->id)->update(['name' => $request->name]);
+//            Task::find($id)->save(['name' => $request->name]);    //这个方法是不正确
+            Task::find($id)->update(['name' => $request->input('name')]);
+            return redirect('task/index');
+        } else {
+            $task = Task::find($id);
+            return view('Task.edit', ['task' => $task]);
+        }
+    }
 
     public function delete($id)
     {

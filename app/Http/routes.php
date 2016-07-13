@@ -91,6 +91,8 @@ Route::group(['prefix' => 'task'], function () {
     Route::delete('/destroy/{id}', 'TaskController@destroy');
 
     Route::delete('/destroy2/{id}', 'TaskController@destroy_2');
+
+    Route::match(['get', 'post'], '/edit/{id}', 'TaskController@edit');
 });
 
 
